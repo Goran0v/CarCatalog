@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarCatalog.Common\CarCatalog.Common.csproj" />
-    <ProjectReference Include="..\CarCatalog.Data\CarCatalog.Data.csproj" />
   </ItemGroup>
 
 </Project>
