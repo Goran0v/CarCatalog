@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static CarCatalog.Common.EntityValidationConstants.CarSellerValidations;
+using static CarCatalog.Common.EntityValidationConstants.CarBuyerValidations;
 
 namespace CarCatalog.Data.Models
 {
-    public class CarSeller
+    public class CarBuyer
     {
-        public CarSeller()
+        public CarBuyer()
         {
             this.Id = Guid.NewGuid();
-            this.CarsAvailable = new HashSet<Car>();
+            this.CarsBought = new HashSet<Car>();
         }
 
         [Key]
@@ -26,10 +26,6 @@ namespace CarCatalog.Data.Models
         [MaxLength(EmailMaxValue)]
         public string Email { get; set; } = null!;
 
-        [Required]
-        [MaxLength(AddressMaxValue)]
-        public string Address { get; set; } = null!;
-
-        public virtual ICollection<Car> CarsAvailable { get; set; } = null!;
+        public virtual ICollection<Car> CarsBought { get; set; } = null!;
     }
 }

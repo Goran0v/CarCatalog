@@ -24,9 +24,11 @@ namespace CarCatalog.Data.Models
 
         public float EngineDisplacement { get; set; }
 
-        public float Mileage { get; set; }
+        public int Mileage { get; set; }
 
         public float FuelConsumption { get; set; }
+
+        public int PriceForSale { get; set; }
 
         [Required]
         [MaxLength(ImageUrlMaxValue)]
