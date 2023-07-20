@@ -9,7 +9,7 @@ namespace CarCatalog.Web.Controllers
 
         public HomeController()
         {
-            
+
         }
 
         public IActionResult Index()

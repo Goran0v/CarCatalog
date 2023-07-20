@@ -37,5 +37,13 @@ namespace CarCatalog.Data.Models
         [Required]
         [MaxLength(DescriptionMaxValue)]
         public string? Description { get; set; }
+
+        public Guid? BuyerId { get; set; }
+
+        public virtual CarBuyer? Buyer { get; set; }
+
+        public Guid SellerId { get; set; }
+
+        public virtual CarSeller Seller { get; set; } = null!;
     }
 }
