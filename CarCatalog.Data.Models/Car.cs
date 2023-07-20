@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using static CarCatalog.Common.EntityValidationConstants.CarValidations;
 
 namespace CarCatalog.Data.Models
@@ -32,5 +27,13 @@ namespace CarCatalog.Data.Models
         public float Mileage { get; set; }
 
         public float FuelConsumption { get; set; }
+
+        [Required]
+        [MaxLength(ImageUrlMaxValue)]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
+        [MaxLength(DescriptionMaxValue)]
+        public string? Description { get; set; }
     }
 }
