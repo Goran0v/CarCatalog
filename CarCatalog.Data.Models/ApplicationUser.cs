@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CarCatalog.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace HouseRentingSystem.Data.Models
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
+            this.Cars = new HashSet<Car>();
         }
+
+        public virtual ICollection<Car> Cars { get; set; } = null!;
     }
 }

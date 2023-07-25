@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HouseRentingSystem.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using static CarCatalog.Common.EntityValidationConstants.CarSellerValidations;
 
 namespace CarCatalog.Data.Models
@@ -29,6 +30,10 @@ namespace CarCatalog.Data.Models
         [Required]
         [MaxLength(AddressMaxValue)]
         public string Address { get; set; } = null!;
+
+        public Guid UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; } = null!;
 
         public virtual ICollection<Car> CarsAvailable { get; set; } = null!;
     }
