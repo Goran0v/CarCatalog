@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static CarCatalog.Common.EntityValidationConstants.CarValidations;
 
 namespace CarCatalog.Data.Models
@@ -48,5 +49,10 @@ namespace CarCatalog.Data.Models
         [Required]
         [MaxLength(DescriptionMaxValue)]
         public string Description { get; set; } = null!;
+
+        [ForeignKey(nameof(Car))]
+        public Guid CarId { get; set; }
+
+        public virtual Car Car { get; set; } = null!;
     }
 }
