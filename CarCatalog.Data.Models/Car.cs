@@ -26,6 +26,8 @@ namespace CarCatalog.Data.Models
 
         public int Mileage { get; set; }
 
+        public int Weight { get; set; }
+
         public float FuelConsumption { get; set; }
 
         public int PriceForSale { get; set; }

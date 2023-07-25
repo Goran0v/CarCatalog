@@ -22,6 +22,9 @@
             public const string MileageMinValue = "1000";
             public const string MileageMaxValue = "1500000";
 
+            public const string WeightMinValue = "500";
+            public const string WeightMaxValue = "2500";
+
             public const string FuelConsumptionMinValue = "4";
             public const string FuelConsumptionMaxValue = "40";
 
