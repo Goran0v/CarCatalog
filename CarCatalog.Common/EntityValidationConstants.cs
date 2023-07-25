@@ -77,5 +77,17 @@
             public const int EmailMinValue = 10;
             public const int EmailMaxValue = 20;
         }
+
+        public static class CarDealerValidations
+        {
+            public const int NameMinValue = 3;
+            public const int NameMaxValue = 20;
+
+            public const int PhoneNumberMinValue = 10;
+            public const int PhoneNumberMaxValue = 15;
+
+            public const int AddressMinValue = 10;
+            public const int AddressMaxValue = 50;
+        }
     }
 }
