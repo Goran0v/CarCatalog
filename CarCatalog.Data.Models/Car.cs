@@ -32,6 +32,10 @@ namespace CarCatalog.Data.Models
 
         public int PriceForSale { get; set; }
 
+        public TransmissionType Transmission { get; set; }
+
+        public EngineType Engine { get; set; }
+
         [Required]
         [MaxLength(ImageUrlMaxValue)]
         public string ImageUrl { get; set; } = null!;

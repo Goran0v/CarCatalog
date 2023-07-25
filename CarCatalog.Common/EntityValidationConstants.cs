@@ -4,6 +4,21 @@
     {
         public static class CarValidations
         {
+            public enum TransmissionType
+            {
+                Manual = 0,
+                Automatic = 1
+            }
+
+            public enum EngineType
+            {
+                Gasoline = 0,
+                Diesel = 1,
+                Gas = 2,
+                Electric = 3,
+                Hybrid = 4
+            }
+
             public const int BrandMinValue = 3;
             public const int BrandMaxValue = 20;
 
