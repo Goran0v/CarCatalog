@@ -23,10 +23,6 @@ namespace CarCatalog.Data.Models
         [MaxLength(PhoneNumberMaxValue)]
         public string PhoneNumber { get; set; } = null!;
 
-        [Required]
-        [MaxLength(EmailMaxValue)]
-        public string Email { get; set; } = null!;
-
         public Guid UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; } = null!;

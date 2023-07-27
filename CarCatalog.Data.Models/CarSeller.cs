@@ -24,10 +24,6 @@ namespace CarCatalog.Data.Models
         public string PhoneNumber { get; set; } = null!;
 
         [Required]
-        [MaxLength(EmailMaxValue)]
-        public string Email { get; set; } = null!;
-
-        [Required]
         [MaxLength(AddressMaxValue)]
         public string Address { get; set; } = null!;
 
