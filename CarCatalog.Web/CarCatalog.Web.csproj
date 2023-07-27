@@ -23,6 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CarCatalog.Common\CarCatalog.Common.csproj" />
     <ProjectReference Include="..\CarCatalog.Data\CarCatalog.Data.csproj" />
+    <ProjectReference Include="..\CarCatalog.Services.Data\CarCatalog.Services.Data.csproj" />
+    <ProjectReference Include="..\CarCatalog.Web.Infrastructure\CarCatalog.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\CarCatalog.Web.ViewModels\CarCatalog.Web.ViewModels.csproj" />
   </ItemGroup>
 

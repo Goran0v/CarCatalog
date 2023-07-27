@@ -1,6 +1,7 @@
+using CarCatalog.Services.Data.Interfaces;
 using CarCatalog.Web.Data;
 using HouseRentingSystem.Data.Models;
-using Microsoft.AspNetCore.Identity;
+using HouseRentingSystem.Web.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
     .AddEntityFrameworkStores<CarCatalogDbContext>();
+
+builder.Services.AddApplicationServices(typeof(ICarService));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
