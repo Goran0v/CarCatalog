@@ -4,6 +4,7 @@ using CarCatalog.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarCatalog.Data.Migrations
 {
     [DbContext(typeof(CarCatalogDbContext))]
-    partial class CarCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727133324_GeneratedCarInfos")]
+    partial class GeneratedCarInfos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,29 +59,6 @@ namespace CarCatalog.Data.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5bf7c130-c1c6-4f20-bc46-e3606645b6f0"),
-                            CarDealerId = 1,
-                            CarInfoId = new Guid("ff4a595a-760e-4fc7-bf12-ab4c8e483f50"),
-                            SellerId = new Guid("958935ff-88c6-49a7-9cf3-83ad17184928")
-                        },
-                        new
-                        {
-                            Id = new Guid("bfd49b07-74a0-4ad6-b7e1-9b97efd3764f"),
-                            CarDealerId = 2,
-                            CarInfoId = new Guid("4c139448-ccdc-4f58-b58a-7b8cb20ced4e"),
-                            SellerId = new Guid("47cecf13-b028-4b4e-990e-6676609b8c8b")
-                        },
-                        new
-                        {
-                            Id = new Guid("bfd7f2c1-e2e3-4ded-8345-1b76fa0a0830"),
-                            CarDealerId = 2,
-                            CarInfoId = new Guid("223c38c9-9842-452c-867d-31fbb4ab177d"),
-                            SellerId = new Guid("47cecf13-b028-4b4e-990e-6676609b8c8b")
-                        });
                 });
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarBuyer", b =>
@@ -201,7 +180,7 @@ namespace CarCatalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b5ec81b8-d35e-47c8-a812-7b16b4bbe63b"),
+                            Id = new Guid("ff4a595a-760e-4fc7-bf12-ab4c8e483f50"),
                             Brand = "Citroen",
                             CarType = "Minivan",
                             Description = "A really good family car with low fuel consumption.",
@@ -218,7 +197,7 @@ namespace CarCatalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42ac5131-54a9-4dd0-9d10-6bb8110fd728"),
+                            Id = new Guid("4c139448-ccdc-4f58-b58a-7b8cb20ced4e"),
                             Brand = "Fiat",
                             CarType = "Hatchback",
                             Description = "A quick hatchback with a lot of space.",
@@ -235,7 +214,7 @@ namespace CarCatalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c0dc587-e1db-4194-8b15-1007f8b3bd1e"),
+                            Id = new Guid("223c38c9-9842-452c-867d-31fbb4ab177d"),
                             Brand = "Audi",
                             CarType = "Sedan",
                             Description = "An old but fast classic sedan.",

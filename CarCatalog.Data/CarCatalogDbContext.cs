@@ -3,6 +3,7 @@ using HouseRentingSystem.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace CarCatalog.Web.Data
 {
@@ -21,10 +22,13 @@ namespace CarCatalog.Web.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            Assembly configAssembly = Assembly.GetAssembly(typeof(CarCatalogDbContext)) ?? Assembly.GetExecutingAssembly();
+            builder.ApplyConfigurationsFromAssembly(configAssembly);
+
             builder.Entity<Car>()
                 .HasOne(c => c.CarInfo)
-                .WithOne(ci => ci.Car)
-                .HasForeignKey<CarInfo>(ci => ci.CarId)
+                .WithOne()
+                .HasForeignKey<Car>(c => c.CarInfoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Car>()
