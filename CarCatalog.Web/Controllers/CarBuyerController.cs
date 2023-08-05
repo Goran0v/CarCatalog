@@ -59,7 +59,7 @@ namespace CarCatalog.Web.Controllers
 
             if (isUsernameTaken)
             {
-                ModelState.AddModelError(nameof(model.PhoneNumber), "A car buyer with the provided username already exists!");
+                ModelState.AddModelError(nameof(model.Username), "A car buyer with the provided username already exists!");
             }
 
             if (!this.ModelState.IsValid)
@@ -74,10 +74,10 @@ namespace CarCatalog.Web.Controllers
             catch (Exception)
             {
                 this.TempData[ErrorMessage] = "An unexpected error occured while registering you as a buyer! Please try again later or contact an administrator.";
-                return this.RedirectToAction("All", "Home");
+                return this.RedirectToAction("Index", "Home");
             }
 
-            return this.RedirectToAction("All", "Car");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }
