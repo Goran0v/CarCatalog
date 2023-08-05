@@ -3,6 +3,7 @@ using CarCatalog.Web.Infrastructure.Extensions;
 using CarCatalog.Web.ViewModels.CarBuyer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static CarCatalog.Common.NotificationMessagesConstants;
 
 namespace CarCatalog.Web.Controllers
 {
@@ -76,7 +77,7 @@ namespace CarCatalog.Web.Controllers
                 return this.RedirectToAction("All", "Home");
             }
 
-            return this.RedirectToAction("All", "Home");
+            return this.RedirectToAction("All", "Car");
         }
     }
 }

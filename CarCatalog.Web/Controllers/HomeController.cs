@@ -14,7 +14,7 @@ namespace CarCatalog.Web.Controllers
             this.carService = carService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Index()
         {
             var cars = await carService.AllCarsAsync();
             return View(cars);
