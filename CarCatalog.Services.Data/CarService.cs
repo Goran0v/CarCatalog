@@ -14,14 +14,13 @@ namespace CarCatalog.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<IndexViewModel>> LastThreeCarsAsync()
+        public async Task<IEnumerable<IndexViewModel>> AllCarsAsync()
         {
             return await
                 this.dbContext
                 .Cars
                 .Where(c => c.BuyerId.HasValue == false)
                 .OrderByDescending(c => c.Id)
-                .Take(3)
                 .Select(c => new IndexViewModel()
                 {
                     Id = c.Id.ToString(),
