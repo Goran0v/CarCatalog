@@ -2,6 +2,7 @@ using CarCatalog.Services.Data.Interfaces;
 using CarCatalog.Web.Data;
 using HouseRentingSystem.Data.Models;
 using HouseRentingSystem.Web.Infrastructure.Extensions;
+using HouseRentingSystem.Web.Infrastructure.ModelBinders;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +28,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddApplicationServices(typeof(ICarService));
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddMvcOptions(options =>
+    {
+        options.ModelBinderProviders.Insert(0, new FloatModelBinderProvider());
+    });
 
 var app = builder.Build();
 

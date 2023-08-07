@@ -29,10 +29,10 @@
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CarSeller" asp-action="Sell">Sell cars</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Sell cars</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CarBuyer" asp-action="Buy">Buy cars</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Buy">Buy cars</a>
                             </li>
                         }
                     </ul>
