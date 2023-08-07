@@ -68,6 +68,7 @@ namespace CarCatalog.Services.Data
             await this.dbContext.Cars.AddAsync(car);
             CarSeller seller = await this.dbContext.CarSellers.FirstAsync(cs => cs.Id == Guid.Parse(sellerId));
             seller.CarsAvailable.Add(car);
+            car.Dealer.RegisteredCars.Add(car);
             await this.dbContext.SaveChangesAsync();
 
             return car.Id.ToString();
