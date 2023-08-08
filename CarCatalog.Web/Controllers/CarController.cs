@@ -111,6 +111,32 @@ namespace CarCatalog.Web.Controllers
             return this.View(myCars);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            bool carExists = await this.carService.CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            try
+            {
+                CarDetailsViewModel? viewModel = await this.carService
+                    .GetCarDetailsByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = "An unexpected error ocurred. Please try again later or contact an administratror!";

@@ -17,8 +17,8 @@
         <p class="lead">
             @if (User.Identity?.IsAuthenticated ?? false)
             {
-                <a asp-controller="CarSeller" asp-action="Sell" class="btn btn-primary btn-lg"
-           role="button">Sell Car</a>
+                <a asp-controller="Car" asp-action="Add" class="btn btn-primary btn-lg"
+           role="button">Sell a Car</a>
             }
         </p>
     </div>
@@ -40,7 +40,7 @@
 
                 <div>
                     <h5>
-                        <a class="btn btn-primary" asp-controller="Car" aspaction="Details"
+                        <a class="btn btn-primary" asp-controller="Car" asp-action="Details" aspaction="Details"
                    asp-route-id="@car.Id"> @car.Brand @car.Model</a>
                     </h5>
                 </div>
@@ -54,7 +54,7 @@
 
                 <div>
                     <h5>
-                        <a class="btn btn-primary" asp-controller="Car" aspaction="Details"
+                        <a class="btn btn-primary" asp-controller="Car" asp-action="Details" aspaction="Details"
                    asp-route-id="@car.Id"> @car.Brand @car.Model</a>
                     </h5>
                 </div>

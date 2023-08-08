@@ -13,6 +13,8 @@ namespace CarCatalog.Services.Data.Interfaces
 
         Task<IEnumerable<CarAllViewModel>> AllCarsByBuyerIdAsync(string buyerId);
 
-        Task<CarDetailsViewModel> GetCarDetailsByIdAsync(string carId);
+        Task<CarDetailsViewModel?> GetCarDetailsByIdAsync(string carId);
+
+        Task<bool> CarExistsByIdAsync(string carId);
     }
 }

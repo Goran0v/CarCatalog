@@ -2,6 +2,7 @@
 using CarCatalog.Services.Data.Interfaces;
 using CarCatalog.Web.Data;
 using CarCatalog.Web.ViewModels.Car;
+using CarCatalog.Web.ViewModels.CarSeller;
 using CarCatalog.Web.ViewModels.Home;
 using Microsoft.EntityFrameworkCore;
 
@@ -91,6 +92,15 @@ namespace CarCatalog.Services.Data
             return allSellerCars;
         }
 
+        public async Task<bool> CarExistsByIdAsync(string carId)
+        {
+            bool result = await this.dbContext
+                .Cars
+                .AnyAsync(c => c.Id.ToString() == carId);
+
+            return result;
+        }
+
         public async Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string sellerId)
         {
             CarInfo carInfo = new CarInfo()
@@ -130,9 +140,46 @@ namespace CarCatalog.Services.Data
             return car.Id.ToString();
         }
 
-        public Task<CarDetailsViewModel> GetCarDetailsByIdAsync(string carId)
+        public async Task<CarDetailsViewModel?> GetCarDetailsByIdAsync(string carId)
         {
-            throw new NotImplementedException();
+            Car? car = await this.dbContext
+                .Cars
+                .FirstOrDefaultAsync(c => c.Id.ToString() == carId);
+
+            if (car == null)
+            {
+                return null;
+            }
+
+            string sellerId = car.SellerId.ToString();
+            CarSeller seller = await this.dbContext.CarSellers.FirstAsync(cs => cs.Id.ToString() == sellerId);
+            CarInfo carInfo = await this.dbContext.CarInfos.FirstAsync(ci => ci.Id == car.CarInfoId);
+            CarDealer dealer = await this.dbContext.CarDealers.FirstAsync(d => d.Id == car.CarDealerId);
+
+            return new CarDetailsViewModel()
+            {
+                Id = car!.Id.ToString(),
+                Brand = carInfo.Brand,
+                Model = carInfo.Model,
+                CarType = carInfo.CarType,
+                HorsePower = carInfo.HorsePower,
+                EngineDisplacement = carInfo.EngineDisplacement,
+                Mileage = carInfo.Mileage,
+                Weight = carInfo.Weight,
+                FuelConsumption = carInfo.FuelConsumption,
+                PriceForSale = carInfo.PriceForSale,
+                Transmission = carInfo.Transmission,
+                Engine = carInfo.Engine,
+                ImageUrl = carInfo.ImageUrl,
+                Description = carInfo.Description,
+                CarDealerName = dealer.Name,
+                Seller = new CarSellerInfoOnCarViewModel()
+                {
+                    Username = seller.Username,
+                    PhoneNumber = seller.PhoneNumber,
+                    Address = seller.Address
+                }
+            };
         }
     }
 }

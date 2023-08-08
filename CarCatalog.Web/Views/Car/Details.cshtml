@@ -1,0 +1,75 @@
+﻿@using CarCatalog.Services.Data.Interfaces
+@using CarCatalog.Web.Infrastructure.Extensions
+@using CarCatalog.Web.ViewModels.Car
+@model CarDetailsViewModel
+@{
+    ViewBag.Title = "Car Details";
+}
+
+@inject ICarSellerService CarSellerService
+@inject ICarBuyerService CarBuyerService
+@{
+    bool isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserTheSellerOfTheCar = await CarSellerService.HasACarWithIdAsync(this.User.GetId()!, Model.Id);
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Car Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Brand @Model.Model</u></p>
+            <p>Car Type: <b>@Model.CarType</b></p>
+            <p>HorsePower: <b>@Model.HorsePower</b></p>
+            <p>Engine Displacement: <b>@Model.EngineDisplacement</b></p>
+            <p>Mileage: <b>@Model.Mileage</b></p>
+            <p>Weight: <b>@Model.Weight</b></p>
+            <p>Fuel Consumption: <b>@Model.FuelConsumption</b></p>
+            <p>Price: <b>@Model.PriceForSale</b></p>
+            <p>Transmission: <b>@Model.Transmission</b></p>
+            <p>Engine: <b>@Model.Engine</b></p>
+            <p>Dealership: <b>@Model.CarDealerName</b></p>
+            <p>
+                Price: <b>@String.Format("{0:f2}", Model.PriceForSale) BGN</b>
+            </p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (this.User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserSeller && isUserTheSellerOfTheCar)
+                    {
+                        <a class="btn btn-warning" asp-controller="Car" aspaction="Edit"
+                   asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Car" aspaction="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
+                    }
+
+                    @if (isUserBuyer && !isUserTheSellerOfTheCar)
+                    {
+                        <form class="ml-2" asp-controller="Car"
+                      asp-action="Buy" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit"
+                           value="Buy" />
+                        </form>
+                    }
+                }
+            </div>
+
+            <p></p>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Seller Info</h5>
+                    <p class="card-text">Email: @Model.Seller.Username</p>
+                    <p class="card-text">Phone Number: @Model.Seller.PhoneNumber</p>
+                    <p class="card-text">Address: @Model.Seller.Address</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
