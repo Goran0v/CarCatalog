@@ -12,13 +12,15 @@ namespace CarCatalog.Web.Controllers
     {
         private readonly ICarService carService;
         private readonly ICarSellerService carSellerService;
+        private readonly ICarBuyerService carBuyerService;
         private readonly ICarDealerService carDealerService;
 
-        public CarController(ICarService carService, ICarSellerService carSellerService, ICarDealerService carDealerService)
+        public CarController(ICarService carService, ICarSellerService carSellerService, ICarDealerService carDealerService, ICarBuyerService carBuyerService)
         {
             this.carService = carService;
             this.carSellerService = carSellerService;
             this.carDealerService = carDealerService;
+            this.carBuyerService = carBuyerService;
         }
 
         [HttpGet]
@@ -79,6 +81,34 @@ namespace CarCatalog.Web.Controllers
                 this.ModelState.AddModelError(string.Empty, "An unexpected error occured while trying to add your new car! Please try again later or contact an administrator!");
                 return this.View(carModel);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CarsForSale()
+        {
+            List<CarAllViewModel> myCars = new List<CarAllViewModel>();
+
+            string userId = this.User.GetId()!;
+
+            string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(userId);
+
+            myCars.AddRange(await this.carService.AllCarsBySellerIdAsync(sellerId!));
+
+            return this.View(myCars);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CarsBought()
+        {
+            List<CarAllViewModel> myCars = new List<CarAllViewModel>();
+
+            string userId = this.User.GetId()!;
+
+            string? buyerId = await this.carBuyerService.GetBuyerIdByUserIdAsync(userId);
+
+            myCars.AddRange(await this.carService.AllCarsByBuyerIdAsync(buyerId!));
+
+            return this.View(myCars);
         }
 
         private IActionResult GeneralError()

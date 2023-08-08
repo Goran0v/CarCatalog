@@ -35,6 +35,62 @@ namespace CarCatalog.Services.Data
                 .ToArrayAsync();
         }
 
+        public async Task<IEnumerable<CarAllViewModel>> AllCarsByBuyerIdAsync(string buyerId)
+        {
+            IEnumerable<CarAllViewModel> allBuyerCars = await this.dbContext
+                .Cars
+                .Where(c => c.BuyerId.ToString() == buyerId)
+                .Select(c => new CarAllViewModel()
+                {
+                    Id = c.Id.ToString(),
+                    Brand = c.CarInfo.Brand,
+                    Model = c.CarInfo.Model,
+                    CarType = c.CarInfo.CarType,
+                    HorsePower = c.CarInfo.HorsePower,
+                    EngineDisplacement = c.CarInfo.EngineDisplacement,
+                    Mileage = c.CarInfo.Mileage,
+                    Weight = c.CarInfo.Weight,
+                    FuelConsumption = c.CarInfo.FuelConsumption,
+                    PriceForSale = c.CarInfo.PriceForSale,
+                    Transmission = c.CarInfo.Transmission,
+                    Engine = c.CarInfo.Engine,
+                    ImageUrl = c.CarInfo.ImageUrl,
+                    Description = c.CarInfo.Description,
+                    CarDealerName = c.Dealer.Name
+                })
+                .ToArrayAsync();
+
+            return allBuyerCars;
+        }
+
+        public async Task<IEnumerable<CarAllViewModel>> AllCarsBySellerIdAsync(string sellerId)
+        {
+            IEnumerable<CarAllViewModel> allSellerCars = await this.dbContext
+                .Cars
+                .Where(c => c.SellerId.ToString() == sellerId)
+                .Select(c => new CarAllViewModel()
+                {
+                    Id = c.Id.ToString(),
+                    Brand = c.CarInfo.Brand,
+                    Model = c.CarInfo.Model,
+                    CarType = c.CarInfo.CarType,
+                    HorsePower = c.CarInfo.HorsePower,
+                    EngineDisplacement = c.CarInfo.EngineDisplacement,
+                    Mileage = c.CarInfo.Mileage,
+                    Weight = c.CarInfo.Weight,
+                    FuelConsumption = c.CarInfo.FuelConsumption,
+                    PriceForSale = c.CarInfo.PriceForSale,
+                    Transmission = c.CarInfo.Transmission,
+                    Engine = c.CarInfo.Engine,
+                    ImageUrl = c.CarInfo.ImageUrl,
+                    Description = c.CarInfo.Description,
+                    CarDealerName = c.Dealer.Name
+                })
+                .ToArrayAsync();
+
+            return allSellerCars;
+        }
+
         public async Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string sellerId)
         {
             CarInfo carInfo = new CarInfo()
@@ -72,6 +128,11 @@ namespace CarCatalog.Services.Data
             await this.dbContext.SaveChangesAsync();
 
             return car.Id.ToString();
+        }
+
+        public Task<CarDetailsViewModel> GetCarDetailsByIdAsync(string carId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

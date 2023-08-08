@@ -11,8 +11,8 @@ namespace HouseRentingSystem.Web.Infrastructure.ModelBinders
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.Metadata.ModelType == typeof(float) ||
-                context.Metadata.ModelType == typeof(float?))
+            if (context.Metadata.ModelType == typeof(double) ||
+                context.Metadata.ModelType == typeof(double?))
             {
                 return new FloatModelBinder();
             }

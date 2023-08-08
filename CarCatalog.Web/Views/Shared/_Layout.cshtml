@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using CarCatalog.Services.Data.Interfaces
+@using CarCatalog.Web.Infrastructure.Extensions
+
+@inject ICarSellerService CarSellerService
+@inject ICarBuyerService CarBuyerService
+@{
+    bool isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(this.User.GetId()!);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,12 +38,21 @@
                         </li>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Sell cars</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Buy">Buy cars</a>
-                            </li>
+                            @if (isUserBuyer)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="CarsBought">Cars bought</a>
+                                </li>
+                            }
+                            @if (isUserSeller)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="CarsForSale">My car offers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Sell cars</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <partial name="_LoginPartial" />

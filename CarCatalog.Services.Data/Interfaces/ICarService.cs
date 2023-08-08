@@ -8,5 +8,11 @@ namespace CarCatalog.Services.Data.Interfaces
         Task<IEnumerable<IndexViewModel>> AllCarsAsync();
 
         Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string sellerId);
+
+        Task<IEnumerable<CarAllViewModel>> AllCarsBySellerIdAsync(string sellerId);
+
+        Task<IEnumerable<CarAllViewModel>> AllCarsByBuyerIdAsync(string buyerId);
+
+        Task<CarDetailsViewModel> GetCarDetailsByIdAsync(string carId);
     }
 }

@@ -54,5 +54,17 @@ namespace CarCatalog.Services.Data
             await dbContext.CarBuyers.AddAsync(buyer);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<string?> GetBuyerIdByUserIdAsync(string userId)
+        {
+            CarBuyer? buyer = await this.dbContext.CarBuyers
+                .FirstOrDefaultAsync(b => b.UserId.ToString() == userId);
+            if (buyer == null)
+            {
+                return null;
+            }
+
+            return buyer.Id.ToString();
+        }
     }
 }

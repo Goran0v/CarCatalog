@@ -11,5 +11,7 @@ namespace CarCatalog.Services.Data.Interfaces
         Task<bool> CarBuyerExistsByUsernameAsync(string username);
 
         Task CreateAsync(string userId, BecomeACarBuyerFormModel model);
+
+        Task<string?> GetBuyerIdByUserIdAsync(string userId);
     }
 }
