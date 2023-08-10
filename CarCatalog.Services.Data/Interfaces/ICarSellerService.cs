@@ -4,6 +4,8 @@ namespace CarCatalog.Services.Data.Interfaces
 {
     public interface ICarSellerService
     {
+        Task<string> GetCarSellerUsernameByUserIdAsync(string userId);
+
         Task<bool> CarSellerExistsByUserIdAsync(string userId);
 
         Task<bool> CarSellerExistsByPhoneNumberAsync(string phoneNumber);

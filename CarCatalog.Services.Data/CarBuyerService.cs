@@ -66,5 +66,14 @@ namespace CarCatalog.Services.Data
 
             return buyer.Id.ToString();
         }
+
+        public async Task<string> GetCarBuyerUsernameByUserIdAsync(string userId)
+        {
+            CarBuyer buyer = await this.dbContext
+                .CarBuyers
+                .FirstAsync(cs => cs.UserId.ToString() == userId);
+
+            return buyer.Username;
+        }
     }
 }
