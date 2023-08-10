@@ -140,6 +140,21 @@ namespace CarCatalog.Services.Data
             return car.Id.ToString();
         }
 
+        public async Task DeleteCarByIdAsync(string id)
+        {
+            Car carToDelete = await this.dbContext
+                .Cars
+                .FirstAsync(c => c.Id.ToString() == id);
+
+            CarSeller seller = await this.dbContext.CarSellers.FirstAsync(cs => cs.CarsAvailable.Contains(carToDelete));
+            seller.CarsAvailable.Remove(carToDelete);
+            CarDealer dealer = await this.dbContext.CarDealers.FirstAsync(cd => cd.RegisteredCars.Contains(carToDelete));
+            dealer.RegisteredCars.Remove(carToDelete);
+            this.dbContext.Cars.Remove(carToDelete);
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task EditCarByIdAndFormModelAsync(string id, CarFormModel model)
         {
             Car car = await this.dbContext
@@ -204,6 +219,23 @@ namespace CarCatalog.Services.Data
                     PhoneNumber = seller.PhoneNumber,
                     Address = seller.Address
                 }
+            };
+        }
+
+        public async Task<CarPreDeleteViewModel> GetCarForDeleteByIdAsync(string id)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .Include(c => c.CarInfo)
+                .Include(c => c.Dealer)
+                .FirstAsync(c => c.Id.ToString() == id);
+
+            return new CarPreDeleteViewModel()
+            {
+                Brand = car.CarInfo.Brand,
+                Model = car.CarInfo.Model,
+                ImageUrl = car.CarInfo.ImageUrl,
+                CarDealerName = car.Dealer.Name
             };
         }
 

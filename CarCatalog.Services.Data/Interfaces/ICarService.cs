@@ -20,5 +20,9 @@ namespace CarCatalog.Services.Data.Interfaces
         Task<CarFormModel> GetCarForEditByIdAsync(string carId);
 
         Task EditCarByIdAndFormModelAsync(string id, CarFormModel model);
+
+        Task<CarPreDeleteViewModel> GetCarForDeleteByIdAsync(string id);
+
+        Task DeleteCarByIdAsync(string id);
     }
 }

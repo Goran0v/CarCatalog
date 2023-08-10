@@ -73,8 +73,9 @@ namespace CarCatalog.Web.Controllers
             {
                 string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
                 string carId = await this.carService.CreateAndReturnIdAsync(carModel, sellerId!);
-                return this.RedirectToAction("Index", "Home");
-                //return this.RedirectToAction("Details", "Car", new { id = carId });
+
+                this.TempData[SuccessMessage] = "The car was added successfully";
+                return this.RedirectToAction("Details", "Car", new { id = carId });
             }
             catch (Exception)
             {
@@ -225,7 +226,92 @@ namespace CarCatalog.Web.Controllers
                 return this.View(formModel);
             }
 
+            this.TempData[SuccessMessage] = "The car was edited successfully";
             return this.RedirectToAction("Details", "Car", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserSeller = await this.carSellerService
+                .CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
+            bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
+
+            if (!isSellerOwner)
+            {
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                return this.RedirectToAction("CarsForSale", "Car");
+            }
+
+            try
+            {
+                CarPreDeleteViewModel viewModel = await this.carService.GetCarForDeleteByIdAsync(id);
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, CarPreDeleteViewModel viewModel)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserSeller = await this.carSellerService
+                .CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
+            bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
+
+            if (!isSellerOwner)
+            {
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                return this.RedirectToAction("CarsForSale", "Car");
+            }
+
+            try
+            {
+                await this.carService.DeleteCarByIdAsync(id);
+
+                this.TempData[SuccessMessage] = "The car has been deleted successfully!";
+                return this.RedirectToAction("CarsForSale", "Car");
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

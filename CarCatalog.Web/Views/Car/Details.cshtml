@@ -30,7 +30,6 @@
             <p>Mileage: <b>@Model.Mileage</b></p>
             <p>Weight: <b>@Model.Weight</b></p>
             <p>Fuel Consumption: <b>@Model.FuelConsumption</b></p>
-            <p>Price: <b>@Model.PriceForSale</b></p>
             <p>Transmission: <b>@Model.Transmission</b></p>
             <p>Engine: <b>@Model.Engine</b></p>
             <p>Dealership: <b>@Model.CarDealerName</b></p>
@@ -73,3 +72,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+    {
+    <partial name="_NotificationsPartial" />
+}
