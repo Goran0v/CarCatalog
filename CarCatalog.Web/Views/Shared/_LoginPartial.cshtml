@@ -10,8 +10,6 @@
 @{
     bool isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
     bool isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(this.User.GetId()!);
-    string sellerUsername = await CarSellerService.GetCarSellerUsernameByUserIdAsync(this.User.GetId()!);
-    string buyerUsername = await CarBuyerService.GetCarBuyerUsernameByUserIdAsync(this.User.GetId()!);
 }
 
 <ul class="navbar-nav">
@@ -31,6 +29,7 @@
         }
         else if (isUserBuyer && !isUserSeller)
         {
+            string buyerUsername = await CarBuyerService.GetCarBuyerUsernameByUserIdAsync(this.User.GetId()!);
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @buyerUsername!</a>
             </li>
@@ -40,6 +39,7 @@
         }
         else if (isUserSeller && !isUserBuyer)
         {
+            string sellerUsername = await CarSellerService.GetCarSellerUsernameByUserIdAsync(this.User.GetId()!);
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @sellerUsername!</a>
             </li>
@@ -49,6 +49,7 @@
         }
         else
         {
+            string buyerUsername = await CarBuyerService.GetCarBuyerUsernameByUserIdAsync(this.User.GetId()!);
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @buyerUsername!</a>
             </li>
