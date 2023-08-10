@@ -1,0 +1,107 @@
+﻿@using CarCatalog.Web.ViewModels.Car
+@using static CarCatalog.Common.EntityValidationConstants.CarValidations;
+@model CarFormModel
+@{
+    ViewData["Title"] = "Edit Car";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Brand"></label>
+                <input asp-for="Brand" class="form-control" placeholder="BMW, Audi, Etc..">
+                <span asp-validation-for="Brand" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model"></label>
+                <input asp-for="Model" class="form-control"
+                       placeholder="E36, Quattro, Etc..">
+                <span asp-validation-for="Model" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarType"></label>
+                <input asp-for="CarType" class="form-control"
+                       placeholder="SUV, Hatchback, Etc..">
+                <span asp-validation-for="CarType" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorsePower"></label>
+                <input asp-for="HorsePower" class="form-control">
+                <span asp-validation-for="HorsePower" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineDisplacement"></label>
+                <input asp-for="EngineDisplacement" class="form-control">
+                <span asp-validation-for="EngineDisplacement" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage"></label>
+                <input asp-for="Mileage" class="form-control">
+                <span asp-validation-for="Mileage" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight"></label>
+                <input asp-for="Weight" class="form-control">
+                <span asp-validation-for="Weight" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelConsumption"></label>
+                <input asp-for="FuelConsumption" class="form-control">
+                <span asp-validation-for="FuelConsumption" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceForSale"></label>
+                <input asp-for="PriceForSale" class="form-control">
+                <span asp-validation-for="PriceForSale" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transmission"></label>
+                <select asp-for="Transmission" class="form-control">
+                    @for (int i = 0; i < 2; i++)
+                    {
+                        <option>@((TransmissionType)i)</option>
+                    }
+                </select>
+                <span asp-validation-for="Transmission" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Engine"></label>
+                <select asp-for="Engine" class="form-control">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <option>@((EngineType)i)</option>
+                    }
+                </select>
+                <span asp-validation-for="Engine" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="The car image URL">
+                <span asp-validation-for="ImageUrl" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control"
+                          placeholder="Good maintenance, runs fine..."></textarea>
+                <span asp-validation-for="Description" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarDealerName"></label>
+                <input asp-for="CarDealerName" class="form-control">
+                <span asp-validation-for="CarDealerName" class="small textdanger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

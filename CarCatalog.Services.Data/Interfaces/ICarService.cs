@@ -16,5 +16,9 @@ namespace CarCatalog.Services.Data.Interfaces
         Task<CarDetailsViewModel?> GetCarDetailsByIdAsync(string carId);
 
         Task<bool> CarExistsByIdAsync(string carId);
+
+        Task<CarFormModel> GetCarForEditByIdAsync(string carId);
+
+        Task EditCarByIdAndFormModelAsync(string id, CarFormModel model);
     }
 }

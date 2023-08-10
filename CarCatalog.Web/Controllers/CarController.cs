@@ -137,6 +137,97 @@ namespace CarCatalog.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserSeller = await this.carSellerService
+                .CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
+            bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
+
+            if (!isSellerOwner)
+            {
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                return this.RedirectToAction("CarsForSale", "Car");
+            }
+
+            try
+            {
+                CarFormModel formModel = await this.carService.GetCarForEditByIdAsync(id);
+
+                return this.View(formModel);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, CarFormModel formModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(formModel);
+            }
+
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserSeller = await this.carSellerService
+                .CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
+            bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
+
+            if (!isSellerOwner)
+            {
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                return this.RedirectToAction("CarsForSale", "Car");
+            }
+
+            try
+            {
+                await this.carService.EditCarByIdAndFormModelAsync(id, formModel);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "An unexpected error ocurred while trying to update this car. Please try again later or contact an administratror!");
+
+                return this.View(formModel);
+            }
+
+            return this.RedirectToAction("Details", "Car", new { id });
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = "An unexpected error ocurred. Please try again later or contact an administratror!";

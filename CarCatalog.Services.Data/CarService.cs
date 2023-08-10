@@ -140,6 +140,31 @@ namespace CarCatalog.Services.Data
             return car.Id.ToString();
         }
 
+        public async Task EditCarByIdAndFormModelAsync(string id, CarFormModel model)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .Include(c => c.CarInfo)
+                .Include(c => c.Dealer)
+                .FirstAsync(c => c.Id.ToString() == id);
+
+            car.CarInfo.Brand = model.Brand;
+            car.CarInfo.Model = model.Model;
+            car.CarInfo.CarType = model.CarType;
+            car.CarInfo.EngineDisplacement = model.EngineDisplacement;
+            car.CarInfo.Mileage = model.Mileage;
+            car.CarInfo.Weight = model.Weight;
+            car.CarInfo.FuelConsumption = model.FuelConsumption;
+            car.CarInfo.PriceForSale = model.PriceForSale;
+            car.CarInfo.Transmission = model.Transmission;
+            car.CarInfo.Engine = model.Engine;
+            car.CarInfo.ImageUrl = model.ImageUrl;
+            car.CarInfo.Description = model.Description;
+            car.Dealer.Name = model.CarDealerName;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<CarDetailsViewModel?> GetCarDetailsByIdAsync(string carId)
         {
             Car? car = await this.dbContext
@@ -179,6 +204,33 @@ namespace CarCatalog.Services.Data
                     PhoneNumber = seller.PhoneNumber,
                     Address = seller.Address
                 }
+            };
+        }
+
+        public async Task<CarFormModel> GetCarForEditByIdAsync(string carId)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .Include(c => c.CarInfo)
+                .Include(c => c.Dealer)
+                .FirstAsync(c => c.Id.ToString() == carId);
+
+            return new CarFormModel()
+            {
+                Brand = car.CarInfo.Brand,
+                Model = car.CarInfo.Model,
+                CarType = car.CarInfo.CarType,
+                HorsePower = car.CarInfo.HorsePower,
+                EngineDisplacement = car.CarInfo.EngineDisplacement,
+                Mileage = car.CarInfo.Mileage,
+                Weight = car.CarInfo.Weight,
+                FuelConsumption = car.CarInfo.FuelConsumption,
+                PriceForSale = car.CarInfo.PriceForSale,
+                Transmission = car.CarInfo.Transmission,
+                Engine = car.CarInfo.Engine,
+                ImageUrl = car.CarInfo.ImageUrl,
+                Description = car.CarInfo.Description,
+                CarDealerName = car.Dealer.Name,
             };
         }
     }
