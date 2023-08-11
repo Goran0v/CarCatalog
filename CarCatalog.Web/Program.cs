@@ -6,6 +6,7 @@ using HouseRentingSystem.Web.Infrastructure.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using static CarCatalog.Common.GeneralApplicationConstants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequiredLength =
         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<CarCatalogDbContext>();
 
 builder.Services.AddApplicationServices(typeof(ICarService));
@@ -63,6 +65,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.SeedAdministrator(DevelopmentAdminEmail);
 
 app.UseEndpoints(config =>
 {
