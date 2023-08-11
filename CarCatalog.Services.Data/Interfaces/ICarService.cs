@@ -24,5 +24,11 @@ namespace CarCatalog.Services.Data.Interfaces
         Task<CarPreDeleteViewModel> GetCarForDeleteByIdAsync(string id);
 
         Task DeleteCarByIdAsync(string id);
+
+        Task<bool> IsCarBoughtAsync(string carId);
+
+        Task BuyACar(string carId, string userId);
+
+        Task<CarSellFormModel> SellABoughtCar(string carId, string userId);
     }
 }

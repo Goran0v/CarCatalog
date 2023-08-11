@@ -92,6 +92,37 @@ namespace CarCatalog.Services.Data
             return allSellerCars;
         }
 
+        public async Task BuyACar(string carId, string userId)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .Include(c => c.Dealer)
+                .Include(c => c.Seller)
+                .FirstAsync(c => c.Id.ToString() == carId);
+
+            CarBuyer carBuyer = await this.dbContext
+                .CarBuyers
+                .FirstAsync(cb => cb.UserId.ToString() == userId);
+
+            CarSeller seller = await this.dbContext
+                .CarSellers
+                .FirstAsync(cs => cs.Id == car.SellerId);
+
+            CarDealer dealer = await this.dbContext
+                .CarDealers
+                .FirstAsync(cd => cd.Id == car.CarDealerId);
+
+            carBuyer.CarsBought.Add(car);
+            car.Buyer = carBuyer;
+            //car.Seller.UserId = Guid.Parse(userId);
+            //seller.CarsAvailable.Remove(car);
+            //dealer.RegisteredCars.Remove(car);
+
+            //Have to fix this
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> CarExistsByIdAsync(string carId)
         {
             bool result = await this.dbContext
@@ -150,6 +181,8 @@ namespace CarCatalog.Services.Data
             seller.CarsAvailable.Remove(carToDelete);
             CarDealer dealer = await this.dbContext.CarDealers.FirstAsync(cd => cd.RegisteredCars.Contains(carToDelete));
             dealer.RegisteredCars.Remove(carToDelete);
+            CarInfo info = await this.dbContext.CarInfos.FirstAsync(ci => ci.Id == carToDelete.CarInfoId);
+            this.dbContext.CarInfos.Remove(info);
             this.dbContext.Cars.Remove(carToDelete);
 
             await this.dbContext.SaveChangesAsync();
@@ -263,6 +296,51 @@ namespace CarCatalog.Services.Data
                 ImageUrl = car.CarInfo.ImageUrl,
                 Description = car.CarInfo.Description,
                 CarDealerName = car.Dealer.Name,
+            };
+        }
+
+        public async Task<bool> IsCarBoughtAsync(string carId)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .FirstAsync(c => c.Id.ToString() == carId);
+
+            return car.BuyerId.HasValue;
+        }
+
+        public async Task<CarSellFormModel> SellABoughtCar(string carId, string userId)
+        {
+            Car car = await this.dbContext
+                .Cars
+                .Include(c => c.CarInfo)
+                .Include(c => c.Dealer)
+                .FirstAsync(c => c.Id.ToString() == carId);
+
+            CarSeller seller = await this.dbContext.CarSellers.FirstAsync(cs => cs.UserId == Guid.Parse(userId));
+            seller.CarsAvailable.Add(car);
+            CarBuyer buyer = await this.dbContext.CarBuyers.FirstAsync(cb => cb.Id == car.BuyerId);
+            buyer.CarsBought.Remove(car);
+            car.Dealer.RegisteredCars.Add(car);
+
+            await this.dbContext.SaveChangesAsync();
+
+            return new CarSellFormModel()
+            {
+                Id = car.Id.ToString(),
+                Brand = car.CarInfo.Brand,
+                Model = car.CarInfo.Model,
+                CarType = car.CarInfo.CarType,
+                HorsePower = car.CarInfo.HorsePower,
+                EngineDisplacement = car.CarInfo.EngineDisplacement,
+                Mileage = car.CarInfo.Mileage,
+                Weight = car.CarInfo.Weight,
+                FuelConsumption = car.CarInfo.FuelConsumption,
+                PriceForSale = car.CarInfo.PriceForSale,
+                Transmission = car.CarInfo.Transmission,
+                Engine = car.CarInfo.Engine,
+                ImageUrl = car.CarInfo.ImageUrl,
+                Description = car.CarInfo.Description,
+                CarDealerName = car.Dealer.Name
             };
         }
     }

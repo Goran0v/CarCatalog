@@ -51,7 +51,7 @@ else
                         {
                             @if (isUserSeller)
                             {
-                                <form asp-controller="Car" asp-action="Add"
+                                <form asp-controller="Car" asp-action="SellABoughtCar"
                       asp-route-id="@car.Id" method="post">
                                     <input class="btn btn-primary" type="submit" value="Sell" />
                                 </form>

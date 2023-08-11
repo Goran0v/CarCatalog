@@ -56,7 +56,7 @@ namespace CarCatalog.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
 
                     b.HasData(
                         new
@@ -105,7 +105,7 @@ namespace CarCatalog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarBuyers");
+                    b.ToTable("CarBuyers", (string)null);
                 });
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarDealer", b =>
@@ -136,7 +136,7 @@ namespace CarCatalog.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarDealers");
+                    b.ToTable("CarDealers", (string)null);
                 });
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarInfo", b =>
@@ -196,7 +196,7 @@ namespace CarCatalog.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarInfos");
+                    b.ToTable("CarInfos", (string)null);
 
                     b.HasData(
                         new
@@ -280,7 +280,7 @@ namespace CarCatalog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarSellers");
+                    b.ToTable("CarSellers", (string)null);
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Data.Models.ApplicationUser", b =>

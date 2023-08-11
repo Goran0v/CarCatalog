@@ -85,6 +85,72 @@ namespace CarCatalog.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> SellABoughtCar(string carId)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(carId);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isSeller = await carSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to add new car ads!";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            try
+            {
+                CarSellFormModel carFormModel = new CarSellFormModel();
+
+                return View(carFormModel);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SellABoughtCar(CarSellFormModel formModel)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(formModel.Id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserSeller = await this.carSellerService
+                .CarSellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to sell the car!";
+                return this.RedirectToAction("Enter", "CarSeller");
+            }
+
+            try
+            {
+                await this.carService.SellABoughtCar(formModel.Id, this.User.GetId()!);
+
+                this.TempData[SuccessMessage] = "The car was added successfully";
+                return this.RedirectToAction("Details", "Car", new { id = formModel.Id });
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CarsForSale()
         {
             List<CarAllViewModel> myCars = new List<CarAllViewModel>();
@@ -155,7 +221,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isUserSeller)
             {
-                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit the car info";
                 return this.RedirectToAction("Enter", "CarSeller");
             }
 
@@ -202,7 +268,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isUserSeller)
             {
-                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit the car info";
                 return this.RedirectToAction("Enter", "CarSeller");
             }
 
@@ -247,7 +313,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isUserSeller)
             {
-                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                this.TempData[ErrorMessage] = "You must be a seller in order to delete the car";
                 return this.RedirectToAction("Enter", "CarSeller");
             }
 
@@ -256,7 +322,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isSellerOwner)
             {
-                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to delete it!";
                 return this.RedirectToAction("CarsForSale", "Car");
             }
 
@@ -288,7 +354,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isUserSeller)
             {
-                this.TempData[ErrorMessage] = "You must be a seller in order to edit house info";
+                this.TempData[ErrorMessage] = "You must be a seller in order to delete the car";
                 return this.RedirectToAction("Enter", "CarSeller");
             }
 
@@ -297,7 +363,7 @@ namespace CarCatalog.Web.Controllers
 
             if (!isSellerOwner)
             {
-                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
+                this.TempData[ErrorMessage] = "You must be the owner of the car if you want to delete it!";
                 return this.RedirectToAction("CarsForSale", "Car");
             }
 
@@ -307,6 +373,48 @@ namespace CarCatalog.Web.Controllers
 
                 this.TempData[SuccessMessage] = "The car has been deleted successfully!";
                 return this.RedirectToAction("CarsForSale", "Car");
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(string id)
+        {
+            bool carExists = await this.carService
+                .CarExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id does not exist";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isCarBought = await this.carService.IsCarBoughtAsync(id);
+
+            if (isCarBought)
+            {
+                this.TempData[ErrorMessage] = "The car with the provided id is already bought!";
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            bool isUserBuyer = await this.carBuyerService
+                .CarBuyerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserBuyer)
+            {
+                this.TempData[ErrorMessage] = "You must be a buyer in order to buy this car!";
+                return this.RedirectToAction("Enter", "CarBuyer");
+            }
+
+            try
+            {
+                await this.carService.BuyACar(id, this.User.GetId()!);
+
+                this.TempData[SuccessMessage] = "You have successfully bought this car!";
+                return this.RedirectToAction("CarsBought", "Car");
             }
             catch (Exception)
             {

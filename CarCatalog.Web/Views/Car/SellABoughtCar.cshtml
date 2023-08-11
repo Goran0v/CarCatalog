@@ -1,0 +1,91 @@
+﻿@using CarCatalog.Web.ViewModels.Car
+@using static CarCatalog.Common.EntityValidationConstants.CarValidations;
+@model CarSellFormModel
+@{
+    ViewData["Title"] = "Sell Car";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CarType" class="control-label"></label>
+                <input asp-for="CarType" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HorsePower" class="control-label"></label>
+                <input asp-for="HorsePower" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineDisplacement" class="control-label"></label>
+                <input asp-for="EngineDisplacement" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage" class="control-label"></label>
+                <input asp-for="Mileage" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelConsumption" class="control-label"></label>
+                <input asp-for="FuelConsumption" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceForSale" class="control-label"></label>
+                <input asp-for="PriceForSale" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Transmission"></label>
+                <select asp-for="Transmission" class="form-control">
+                    @for (int i = 0; i < 2; i++)
+                    {
+                        <option>@((TransmissionType)i)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Engine"></label>
+                <select asp-for="Engine" class="form-control">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <option>@((EngineType)i)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CarDealerName" class="control-label"></label>
+                <input asp-for="CarDealerName" class="form-control" disabled="disabled" />
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_NotificationsPartial" />
+}
