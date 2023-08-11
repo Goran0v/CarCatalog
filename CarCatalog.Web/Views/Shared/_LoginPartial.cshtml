@@ -7,9 +7,11 @@
 
 @inject ICarSellerService CarSellerService
 @inject ICarBuyerService CarBuyerService
+@inject IUserService UserService
 @{
     bool isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
     bool isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(this.User.GetId()!);
+    string? fullName = await UserService.GetFullNameByEmailAsync(User.Identity?.Name!);
 }
 
 <ul class="navbar-nav">
@@ -18,7 +20,7 @@
         @if (!isUserBuyer && !isUserSeller)
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @fullName!</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="CarBuyer" asp-action="Enter">Enter as a buyer</a>

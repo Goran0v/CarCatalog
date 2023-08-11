@@ -4,6 +4,9 @@ namespace CarCatalog.Web.ViewModels.CarSeller
 {
     public class CarSellerInfoOnCarViewModel
     {
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; } = null!;
+
         public string Username { get; set; } = null!;
 
         [Display(Name = "Phone")]

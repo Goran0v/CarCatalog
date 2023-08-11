@@ -13,14 +13,16 @@ namespace CarCatalog.Web.Controllers
         private readonly ICarService carService;
         private readonly ICarSellerService carSellerService;
         private readonly ICarBuyerService carBuyerService;
+        private readonly IUserService userService;
         private readonly ICarDealerService carDealerService;
 
-        public CarController(ICarService carService, ICarSellerService carSellerService, ICarDealerService carDealerService, ICarBuyerService carBuyerService)
+        public CarController(ICarService carService, ICarSellerService carSellerService, ICarDealerService carDealerService, ICarBuyerService carBuyerService, IUserService userService)
         {
             this.carService = carService;
             this.carSellerService = carSellerService;
             this.carDealerService = carDealerService;
             this.carBuyerService = carBuyerService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -195,6 +197,7 @@ namespace CarCatalog.Web.Controllers
             {
                 CarDetailsViewModel? viewModel = await this.carService
                     .GetCarDetailsByIdAsync(id);
+                viewModel!.Seller.FullName = await this.userService.GetFullNameByEmailAsync(this.User.Identity?.Name!);
 
                 return View(viewModel);
             }
