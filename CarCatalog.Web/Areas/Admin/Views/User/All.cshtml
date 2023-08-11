@@ -1,10 +1,18 @@
-﻿@model IEnumerable<UserViewModel>
+﻿@using CarCatalog.Services.Data.Interfaces
+@model IEnumerable<UserViewModel>
 @{
     ViewBag.Title = "All Users";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+@inject ICarSellerService CarSellerService
+@inject ICarBuyerService CarBuyerService
+@{
+    bool isUserSeller = false;
+    bool isUserBuyer = false;
+}
 
 <table class="table table-striped">
     <thead>
@@ -13,6 +21,7 @@
             <th><label>Full Name</label></th>
             <th><label>Phone Number</label></th>
             <th><label>User Is Seller</label></th>
+            <th><label>User Is Buyer</label></th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +34,33 @@
                 <td>
                     @if (user.PhoneNumber != string.Empty)
                     {
-                        <label>✔</label>
+                        isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(user.Id);
+                        if (isUserSeller)
+                        {
+                            <label>✔</label>
+                        }
+                        else
+                        {
+                            <label class="text-center">❌</label>
+                        }
+                    }
+                    else
+                    {
+                        <label class="text-center">❌</label>
+                    }
+                </td>
+                <td>
+                    @if (user.PhoneNumber != string.Empty)
+                    {
+                        isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(user.Id);
+                        if (isUserBuyer)
+                        {
+                            <label>✔</label>
+                        }
+                        else
+                        {
+                            <label class="text-center">❌</label>
+                        }
                     }
                     else
                     {
