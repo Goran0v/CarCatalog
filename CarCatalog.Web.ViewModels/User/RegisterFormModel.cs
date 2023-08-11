@@ -23,10 +23,12 @@ namespace CarCatalog.Web.ViewModels.User
 
         [Required]
         [StringLength(FirstNameMaxValue, MinimumLength = FirstNameMinValue)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; } = null!;
 
         [Required]
         [StringLength(LastNameMaxValue, MinimumLength = LastNameMinValue)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; } = null!;
     }
 }
