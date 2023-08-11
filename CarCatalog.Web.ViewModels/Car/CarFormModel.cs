@@ -55,8 +55,7 @@ namespace CarCatalog.Web.ViewModels.Car
         [MaxLength(DescriptionMaxValue)]
         public string Description { get; set; } = null!;
 
-        [Required]
         [StringLength(NameMaxValue, MinimumLength = NameMinValue)]
-        public string CarDealerName { get; set; } = null!;
+        public string? CarDealerName { get; set; }
     }
 }
