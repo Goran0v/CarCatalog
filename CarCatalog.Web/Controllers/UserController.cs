@@ -4,6 +4,8 @@ using HouseRentingSystem.Data.Models;
 using CarCatalog.Web.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
 using static CarCatalog.Common.NotificationMessagesConstants;
+using static CarCatalog.Common.GeneralApplicationConstants;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CarCatalog.Web.Controllers
 {
@@ -11,11 +13,13 @@ namespace CarCatalog.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IMemoryCache memoryCache;
 
-        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IMemoryCache memoryCache)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -55,6 +59,7 @@ namespace CarCatalog.Web.Controllers
             }
 
             await this.signInManager.SignInAsync(user, isPersistent: false);
+            this.memoryCache.Remove(UsersCacheKey);
 
             return this.RedirectToAction("Index", "Home");
         }

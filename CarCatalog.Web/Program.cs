@@ -32,6 +32,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddApplicationServices(typeof(ICarService));
 
+builder.Services.AddMemoryCache();
+builder.Services.AddResponseCaching();
+
 builder.Services.ConfigureApplicationCookie(cfg =>
 {
     cfg.LoginPath = "/User/Login";
