@@ -35,6 +35,7 @@ builder.Services.AddApplicationServices(typeof(ICarService));
 builder.Services.ConfigureApplicationCookie(cfg =>
 {
     cfg.LoginPath = "/User/Login";
+    cfg.AccessDeniedPath = "/Home/Error/401";
 });
 
 builder.Services.AddControllersWithViews()
@@ -73,6 +74,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseEndpoints(config =>
 {
+    config.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
     config.MapDefaultControllerRoute();
     config.MapRazorPages();
 });

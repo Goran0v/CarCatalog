@@ -19,17 +19,26 @@
     {
         @if (!isUserBuyer && !isUserSeller)
         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @fullName!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="CarBuyer" asp-action="Enter">Enter as a buyer</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="CarSeller" asp-action="Enter">Enter as a seller</a>
-            </li>
+            if (this.User.IsAdmin())
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @fullName!</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @fullName!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="CarBuyer" asp-action="Enter">Enter as a buyer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="CarSeller" asp-action="Enter">Enter as a seller</a>
+                </li>
+            }
         }
-        else if (isUserBuyer && !isUserSeller)
+        else if (isUserBuyer && !isUserSeller && !this.User.IsAdmin())
         {
             string buyerUsername = await CarBuyerService.GetCarBuyerUsernameByUserIdAsync(this.User.GetId()!);
             <li class="nav-item">
@@ -39,7 +48,7 @@
                 <a class="nav-link text-dark" asp-controller="CarSeller" asp-action="Enter">Enter as a seller</a>
             </li>
         }
-        else if (isUserSeller && !isUserBuyer)
+        else if (isUserSeller && !isUserBuyer && !this.User.IsAdmin())
         {
             string sellerUsername = await CarSellerService.GetCarSellerUsernameByUserIdAsync(this.User.GetId()!);
             <li class="nav-item">

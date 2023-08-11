@@ -1,5 +1,6 @@
 ﻿using CarCatalog.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using static CarCatalog.Common.GeneralApplicationConstants;
 
 namespace CarCatalog.Web.Controllers
 {
@@ -14,6 +15,11 @@ namespace CarCatalog.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             var cars = await carService.AllCarsAsync();
             return View(cars);
         }
