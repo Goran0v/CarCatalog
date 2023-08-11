@@ -4,6 +4,7 @@ using CarCatalog.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarCatalog.Data.Migrations
 {
     [DbContext(typeof(CarCatalogDbContext))]
-    partial class CarCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811143456_CarDealerIsNowNullable")]
+    partial class CarDealerIsNowNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

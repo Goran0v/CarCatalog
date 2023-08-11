@@ -1,5 +1,4 @@
 ﻿@using CarCatalog.Services.Data.Interfaces
-@using CarCatalog.Web.ViewModels.Home
 @model IEnumerable<IndexViewModel>
 
 @{
@@ -34,7 +33,7 @@
             @if (cars.Count() - 1 == i)
             {
                 <div class="col-12">
-                    <img class="d-block w-100" style="height:500px"
+                    <img class="d-block w-100" style="height:700px"
                  src="@car.ImageUrl" alt="@car.Brand @car.Model">
                 </div>
 
@@ -48,7 +47,7 @@
             else
             {
                 <div class="col-12">
-                    <img class="d-block w-100" style="height:500px"
+                    <img class="d-block w-100" style="height:700px"
                  src="@car.ImageUrl" alt="@car.Brand @car.Model">
                 </div>
 

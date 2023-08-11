@@ -151,7 +151,7 @@ namespace CarCatalog.Services.Data
                 Description = formModel.Description
             };
 
-            int carDealerId = (int)await this.carDealerService.GetIdOfDealershipByNameAsync(formModel.CarDealerName);
+            int? carDealerId = (int)await this.carDealerService.GetIdOfDealershipByNameAsync(formModel.CarDealerName);
 
             Car car = new Car()
             {
@@ -165,7 +165,10 @@ namespace CarCatalog.Services.Data
             await this.dbContext.Cars.AddAsync(car);
             CarSeller seller = await this.dbContext.CarSellers.FirstAsync(cs => cs.Id == Guid.Parse(sellerId));
             seller.CarsAvailable.Add(car);
-            car.Dealer.RegisteredCars.Add(car);
+            if (car.CarDealerId.HasValue)
+            {
+                car.Dealer!.RegisteredCars.Add(car);
+            }
             await this.dbContext.SaveChangesAsync();
 
             return car.Id.ToString();

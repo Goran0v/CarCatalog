@@ -27,15 +27,6 @@ namespace CarCatalog.Data.Configurations
 
             car = new Car()
             {
-                CarInfoId = Guid.Parse("4C139448-CCDC-4F58-B58A-7B8CB20CED4E"),
-                BuyerId = null,
-                SellerId = Guid.Parse("47CECF13-B028-4B4E-990E-6676609B8C8B"),
-                CarDealerId = 2
-            };
-            cars.Add(car);
-
-            car = new Car()
-            {
                 CarInfoId = Guid.Parse("223C38C9-9842-452C-867D-31FBB4AB177D"),
                 BuyerId = null,
                 SellerId = Guid.Parse("47CECF13-B028-4B4E-990E-6676609B8C8B"),

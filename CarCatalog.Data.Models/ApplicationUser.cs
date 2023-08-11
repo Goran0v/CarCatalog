@@ -1,6 +1,7 @@
 ﻿using CarCatalog.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using static CarCatalog.Common.EntityValidationConstants.User;
 
 namespace HouseRentingSystem.Data.Models
 {
@@ -13,8 +14,11 @@ namespace HouseRentingSystem.Data.Models
         }
 
         [Required]
+        [MaxLength(FirstNameMaxValue)]
         public string FirstName { get; set; } = null!;
 
+        [Required]
+        [MaxLength(LastNameMaxValue)]
         public string LastName { get; set; } = null!;
 
         public virtual ICollection<Car> Cars { get; set; } = null!;

@@ -4,6 +4,7 @@ using CarCatalog.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarCatalog.Data.Migrations
 {
     [DbContext(typeof(CarCatalogDbContext))]
-    partial class CarCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811140353_RemovedFiatAndAddedFirstAndLastNameToUser")]
+    partial class RemovedFiatAndAddedFirstAndLastNameToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace CarCatalog.Data.Migrations
                     b.Property<Guid?>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CarDealerId")
+                    b.Property<int>("CarDealerId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("CarInfoId")
@@ -61,14 +63,14 @@ namespace CarCatalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("efabc313-cfbc-492b-b7a1-15e1310b5e44"),
+                            Id = new Guid("d2037dba-188d-42e2-85f2-f7168111e38d"),
                             CarDealerId = 1,
                             CarInfoId = new Guid("ff4a595a-760e-4fc7-bf12-ab4c8e483f50"),
                             SellerId = new Guid("958935ff-88c6-49a7-9cf3-83ad17184928")
                         },
                         new
                         {
-                            Id = new Guid("a69af158-fe7d-4b2a-a65d-c5ba07d38cf8"),
+                            Id = new Guid("a29c60d4-a443-4972-af8a-7ce0e0e21b3f"),
                             CarDealerId = 2,
                             CarInfoId = new Guid("223c38c9-9842-452c-867d-31fbb4ab177d"),
                             SellerId = new Guid("47cecf13-b028-4b4e-990e-6676609b8c8b")
@@ -194,7 +196,7 @@ namespace CarCatalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("af6b913d-e0d4-4fec-9c84-39ada31a0e93"),
+                            Id = new Guid("7f824107-38ac-4dee-a3e9-1039680c1c94"),
                             Brand = "Citroen",
                             CarType = "Minivan",
                             Description = "A really good family car with low fuel consumption.",
@@ -211,7 +213,7 @@ namespace CarCatalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0bfde9b6-f712-492b-8cb1-d16b39b9775e"),
+                            Id = new Guid("4a7369e2-49b0-4a32-aa8c-d11bb88c89e7"),
                             Brand = "Audi",
                             CarType = "Sedan",
                             Description = "An old but fast classic sedan.",
@@ -488,7 +490,8 @@ namespace CarCatalog.Data.Migrations
                     b.HasOne("CarCatalog.Data.Models.CarDealer", "Dealer")
                         .WithMany("RegisteredCars")
                         .HasForeignKey("CarDealerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("CarCatalog.Data.Models.CarInfo", "CarInfo")
                         .WithOne()

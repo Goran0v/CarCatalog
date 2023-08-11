@@ -29,8 +29,8 @@ namespace CarCatalog.Data.Models
         public virtual CarSeller Seller { get; set; } = null!;
 
         [ForeignKey(nameof(Dealer))]
-        public int CarDealerId { get; set; }
+        public int? CarDealerId { get; set; }
 
-        public virtual CarDealer Dealer { get; set; } = null!;
+        public virtual CarDealer? Dealer { get; set; }
     }
 }

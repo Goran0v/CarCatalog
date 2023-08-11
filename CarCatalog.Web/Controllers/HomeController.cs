@@ -1,7 +1,5 @@
 ﻿using CarCatalog.Services.Data.Interfaces;
-using CarCatalog.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CarCatalog.Web.Controllers
 {

@@ -37,24 +37,6 @@ namespace CarCatalog.Data.Configurations
 
             carInfo = new CarInfo()
             {
-                Brand = "Fiat",
-                Model = "Punto Evo",
-                CarType = "Hatchback",
-                HorsePower = 105,
-                EngineDisplacement = 1.4f,
-                Mileage = 75000,
-                Weight = 1060,
-                FuelConsumption = 7.5f,
-                PriceForSale = 10000,
-                Transmission = TransmissionType.Manual,
-                Engine = EngineType.Gasoline,
-                ImageUrl = "https://www.auto-data.net/images/f117/Fiat-Punto-Evo-199.jpg",
-                Description = "A quick hatchback with a lot of space."
-            };
-            carInfos.Add(carInfo);
-
-            carInfo = new CarInfo()
-            {
                 Brand = "Audi",
                 Model = "80 B4",
                 CarType = "Sedan",

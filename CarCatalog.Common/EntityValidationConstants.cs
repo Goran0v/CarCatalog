@@ -89,5 +89,17 @@
             public const int AddressMinValue = 10;
             public const int AddressMaxValue = 50;
         }
+
+        public static class User
+        {
+            public const int PasswordMinValue = 6;
+            public const int PasswordMaxValue = 100;
+
+            public const int FirstNameMinValue = 1;
+            public const int FirstNameMaxValue = 15;
+
+            public const int LastNameMinValue = 1;
+            public const int LastNameMaxValue = 15;
+        }
     }
 }
