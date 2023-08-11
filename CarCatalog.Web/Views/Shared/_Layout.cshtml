@@ -38,13 +38,13 @@
                         </li>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
-                            @if (isUserBuyer)
+                            @if (isUserBuyer || this.User.IsAdmin())
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="CarsBought">Cars bought</a>
                                 </li>
                             }
-                            @if (isUserSeller)
+                            @if (isUserSeller || this.User.IsAdmin())
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="CarsForSale">My car offers</a>

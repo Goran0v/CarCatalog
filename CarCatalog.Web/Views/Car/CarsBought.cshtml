@@ -5,13 +5,6 @@
     ViewData["Title"] = "My Cars";
 }
 
-@inject ICarSellerService CarSellerService
-@inject ICarBuyerService CarBuyerService
-@{
-    bool isUserSeller = await CarSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
-    bool isUserBuyer = await CarBuyerService.CarBuyerExistsByUserIdAsync(this.User.GetId()!);
-}
-
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 

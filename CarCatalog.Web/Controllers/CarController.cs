@@ -30,7 +30,7 @@ namespace CarCatalog.Web.Controllers
         {
             bool isSeller = await carSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isSeller)
+            if (!isSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to add new car ads!";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -53,7 +53,7 @@ namespace CarCatalog.Web.Controllers
         {
             bool isSeller = await carSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isSeller)
+            if (!isSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to add new car ads!";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -100,7 +100,7 @@ namespace CarCatalog.Web.Controllers
 
             bool isSeller = await carSellerService.CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isSeller)
+            if (!isSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to add new car ads!";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -222,7 +222,7 @@ namespace CarCatalog.Web.Controllers
             bool isUserSeller = await this.carSellerService
                 .CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the car info";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -231,7 +231,7 @@ namespace CarCatalog.Web.Controllers
             string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
             bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
                 return this.RedirectToAction("CarsForSale", "Car");
@@ -269,7 +269,7 @@ namespace CarCatalog.Web.Controllers
             bool isUserSeller = await this.carSellerService
                 .CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the car info";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -278,7 +278,7 @@ namespace CarCatalog.Web.Controllers
             string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
             bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the owner of the car if you want to edit it!";
                 return this.RedirectToAction("CarsForSale", "Car");
@@ -314,7 +314,7 @@ namespace CarCatalog.Web.Controllers
             bool isUserSeller = await this.carSellerService
                 .CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to delete the car";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -323,7 +323,7 @@ namespace CarCatalog.Web.Controllers
             string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
             bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the owner of the car if you want to delete it!";
                 return this.RedirectToAction("CarsForSale", "Car");
@@ -355,7 +355,7 @@ namespace CarCatalog.Web.Controllers
             bool isUserSeller = await this.carSellerService
                 .CarSellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to delete the car";
                 return this.RedirectToAction("Enter", "CarSeller");
@@ -364,7 +364,7 @@ namespace CarCatalog.Web.Controllers
             string? sellerId = await this.carSellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
             bool isSellerOwner = await this.carSellerService.HasACarWithIdAsync(this.User.GetId()!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the owner of the car if you want to delete it!";
                 return this.RedirectToAction("CarsForSale", "Car");
@@ -406,7 +406,7 @@ namespace CarCatalog.Web.Controllers
             bool isUserBuyer = await this.carBuyerService
                 .CarBuyerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserBuyer)
+            if (!isUserBuyer && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a buyer in order to buy this car!";
                 return this.RedirectToAction("Enter", "CarBuyer");
