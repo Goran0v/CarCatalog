@@ -1,0 +1,96 @@
+﻿@model MyCarsViewModel
+@{
+    ViewBag.Title = "My Cars";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<hr />
+
+<h4>My Added Cars</h4>
+
+@if (!Model.AddedCars.Any())
+{
+    <h2 class="text-center">You have no added cars yet!</h2>
+}
+
+<div class="row">
+    @foreach (var car in Model.AddedCars)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@car.ImageUrl" alt="Car Image">
+                <div class="card-body text-center">
+                    <h4>@car.Brand @car.Model</h4>
+                    <h6>Car Type: <b>@car.CarType</b></h6>
+                    <h6>HorsePower: <b>@car.HorsePower</b></h6>
+                    <h6>Engine Displacement: <b>@car.EngineDisplacement</b></h6>
+                    <h6>Mileage: <b>@car.Mileage</b></h6>
+                    <h6>Weight: <b>@car.Weight</b></h6>
+                    <h6>Fuel Consumption: <b>@car.FuelConsumption</b></h6>
+                    <h6>Price: <b>@car.PriceForSale</b></h6>
+                    <h6>Transmission: <b>@car.Transmission</b></h6>
+                    <h6>Engine: <b>@car.Engine</b></h6>
+                    <h6>Description: <b>@car.Description</b></h6>
+                    <h6>Dealership: <b>@car.CarDealerName</b></h6>
+                    <h6>
+                        Price: <b>@String.Format("{0:f2}", car.PriceForSale) BGN</b>
+                    </h6>
+                    <br />
+                    <a asp-area="" asp-controller="Car" asp-action="Details" asp-route-id="@car.Id"
+                   class="btn btn-success">Details</a>
+                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-area="" asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id"
+                   class="btn btn-warning">Edit</a>
+                        <a asp-area="" asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id"
+                   class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<h4>My bought Cars</h4>
+
+@if (!Model.CarsBought.Any())
+{
+    <h2 class="text-center">You have no bought houses yet!</h2>
+}
+<div class="row">
+    @foreach (var car in Model.CarsBought)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@car.ImageUrl" alt="Car Image">
+                <div class="card-body text-center">
+                    <h4>@car.Brand @car.Model</h4>
+                    <h6>Car Type: <b>@car.CarType</b></h6>
+                    <h6>HorsePower: <b>@car.HorsePower</b></h6>
+                    <h6>Engine Displacement: <b>@car.EngineDisplacement</b></h6>
+                    <h6>Mileage: <b>@car.Mileage</b></h6>
+                    <h6>Weight: <b>@car.Weight</b></h6>
+                    <h6>Fuel Consumption: <b>@car.FuelConsumption</b></h6>
+                    <h6>Price: <b>@car.PriceForSale</b></h6>
+                    <h6>Transmission: <b>@car.Transmission</b></h6>
+                    <h6>Engine: <b>@car.Engine</b></h6>
+                    <h6>Description: <b>@car.Description</b></h6>
+                    <h6>Dealership: <b>@car.CarDealerName</b></h6>
+                    <h6>
+                        Price: <b>@String.Format("{0:f2}", car.PriceForSale) BGN</b>
+                    </h6>
+                    <br />
+                    <a asp-area="" asp-controller="Car" asp-action="Details" asp-route-id="@car.Id"
+                   class="btn btn-success">Details</a>
+                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <form asp-area="" asp-controller="Car" asp-action="SellABoughtCar"
+                      asp-route-id="@car.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Sell" />
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

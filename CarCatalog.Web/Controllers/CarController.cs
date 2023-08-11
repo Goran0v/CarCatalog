@@ -87,6 +87,14 @@ namespace CarCatalog.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var cars = await carService.AllCarsAsync();
+            return View(cars);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> SellABoughtCar(string carId)
         {
             bool carExists = await this.carService
