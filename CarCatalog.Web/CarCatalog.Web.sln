@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarCatalog.Common", "..\Car
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E8BF1607-5731-486F-9C7C-96CF006647F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCatalog.Services.Data", "..\CarCatalog.Services.Data\CarCatalog.Services.Data.csproj", "{5F43DF4D-DA13-4778-A5DE-8E222509A334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarCatalog.Services.Data", "..\CarCatalog.Services.Data\CarCatalog.Services.Data.csproj", "{5F43DF4D-DA13-4778-A5DE-8E222509A334}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCatalog.Web.Infrastructure", "..\CarCatalog.Web.Infrastructure\CarCatalog.Web.Infrastructure.csproj", "{82DD3D96-E5B0-4DB9-8CE7-48334611E73A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarCatalog.Web.Infrastructure", "..\CarCatalog.Web.Infrastructure\CarCatalog.Web.Infrastructure.csproj", "{82DD3D96-E5B0-4DB9-8CE7-48334611E73A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B556D013-FF81-4173-96BA-37A8AEFE8C60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCatalog.Services.Tests", "..\CarCatalog.Services.Tests\CarCatalog.Services.Tests.csproj", "{262067FA-74F7-489A-B0DF-5DBBCB4FE887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{82DD3D96-E5B0-4DB9-8CE7-48334611E73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82DD3D96-E5B0-4DB9-8CE7-48334611E73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82DD3D96-E5B0-4DB9-8CE7-48334611E73A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262067FA-74F7-489A-B0DF-5DBBCB4FE887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262067FA-74F7-489A-B0DF-5DBBCB4FE887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262067FA-74F7-489A-B0DF-5DBBCB4FE887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262067FA-74F7-489A-B0DF-5DBBCB4FE887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{A67BDC8B-F167-4C2B-82EC-12EF50E94B78} = {19F23E92-3664-4777-9362-37012E58AD8B}
 		{5F43DF4D-DA13-4778-A5DE-8E222509A334} = {E8BF1607-5731-486F-9C7C-96CF006647F7}
 		{82DD3D96-E5B0-4DB9-8CE7-48334611E73A} = {19F23E92-3664-4777-9362-37012E58AD8B}
+		{262067FA-74F7-489A-B0DF-5DBBCB4FE887} = {B556D013-FF81-4173-96BA-37A8AEFE8C60}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51E186E6-6198-4CD9-937D-64616FA14132}

@@ -2,7 +2,6 @@
 using CarCatalog.Services.Data.Interfaces;
 using CarCatalog.Web.Data;
 using CarCatalog.Web.ViewModels.User;
-using HouseRentingSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarCatalog.Services.Data

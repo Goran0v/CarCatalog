@@ -1,9 +1,8 @@
-﻿using CarCatalog.Data.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using static CarCatalog.Common.EntityValidationConstants.User;
 
-namespace HouseRentingSystem.Data.Models
+namespace CarCatalog.Data.Models
 {
     public class ApplicationUser : IdentityUser<Guid>
     {

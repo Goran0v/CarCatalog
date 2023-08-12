@@ -1,5 +1,4 @@
 ﻿using CarCatalog.Data.Models;
-using HouseRentingSystem.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

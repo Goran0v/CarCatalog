@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using HouseRentingSystem.Data.Models;
+using CarCatalog.Data.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarCatalog.Data.Configurations

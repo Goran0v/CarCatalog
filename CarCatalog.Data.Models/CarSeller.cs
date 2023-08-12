@@ -1,5 +1,4 @@
-﻿using HouseRentingSystem.Data.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static CarCatalog.Common.EntityValidationConstants.CarSellerValidations;
 
 namespace CarCatalog.Data.Models

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace HouseRentingSystem.Web.Infrastructure.ModelBinders
+namespace CarCatalog.Web.Infrastructure.ModelBinders
 {
     public class FloatModelBinderProvider : IModelBinderProvider
     {

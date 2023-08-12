@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
 
-namespace HouseRentingSystem.Web.Infrastructure.ModelBinders
+namespace CarCatalog.Web.Infrastructure.ModelBinders
 {
     public class FloatModelBinder : IModelBinder
     {

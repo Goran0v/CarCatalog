@@ -1,8 +1,8 @@
 using CarCatalog.Services.Data.Interfaces;
 using CarCatalog.Web.Data;
-using HouseRentingSystem.Data.Models;
-using HouseRentingSystem.Web.Infrastructure.Extensions;
-using HouseRentingSystem.Web.Infrastructure.ModelBinders;
+using CarCatalog.Data.Models;
+using CarCatalog.Web.Infrastructure.Extensions;
+using CarCatalog.Web.Infrastructure.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;

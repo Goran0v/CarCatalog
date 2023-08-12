@@ -1,11 +1,11 @@
-﻿using HouseRentingSystem.Data.Models;
+﻿using CarCatalog.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using static CarCatalog.Common.GeneralApplicationConstants;
 
-namespace HouseRentingSystem.Web.Infrastructure.Extensions
+namespace CarCatalog.Web.Infrastructure.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using HouseRentingSystem.Data.Models;
+using CarCatalog.Data.Models;
 using CarCatalog.Web.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
 using static CarCatalog.Common.NotificationMessagesConstants;
