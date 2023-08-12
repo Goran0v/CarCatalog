@@ -10,9 +10,11 @@ namespace CarCatalog.Services.Tests
         public static ApplicationUser CarBuyerUser;
         public static CarSeller Seller;
         public static CarBuyer Buyer;
-        public static CarInfo CarInfo;
+        public static CarInfo CarInfo1;
+        public static CarInfo CarInfo2;
         public static CarDealer CarDealer;
-        public static Car Car;
+        public static Car Car1;
+        public static Car Car2;
         public static void SeedDatabase(CarCatalogDbContext dbContext)
         {
             CarSellerUser = new ApplicationUser()
@@ -57,7 +59,7 @@ namespace CarCatalog.Services.Tests
                 UserId = CarBuyerUser.Id
             };
 
-            CarInfo = new CarInfo()
+            CarInfo1 = new CarInfo()
             {
                 Brand = "Citroen",
                 Model = "Xsara Picasso",
@@ -74,6 +76,23 @@ namespace CarCatalog.Services.Tests
                 Description = "A really good family car with low fuel consumption."
             };
 
+            CarInfo2 = new CarInfo()
+            {
+                Brand = "Subaru",
+                Model = "Forester",
+                CarType = "Crossover",
+                HorsePower = 125,
+                EngineDisplacement = 2.0f,
+                Mileage = 100000,
+                Weight = 1360,
+                FuelConsumption = 8.5f,
+                PriceForSale = 15000,
+                Transmission = TransmissionType.Manual,
+                Engine = EngineType.Gasoline,
+                ImageUrl = "https://cdn3.focus.bg/autodata/i/subaru/forester/forester-ii/large/a942a400b16a08d5b5788147fea6325c.jpg",
+                Description = "A good offroad car."
+            };
+
             CarDealer = new CarDealer()
             {
                 Id = 0,
@@ -83,9 +102,17 @@ namespace CarCatalog.Services.Tests
                 PhoneNumber = "+359897778888"
             };
 
-            Car = new Car()
+            Car1 = new Car()
             {
-                CarInfoId = CarInfo.Id,
+                CarInfoId = CarInfo1.Id,
+                BuyerId = Buyer.Id,
+                SellerId = Seller.Id,
+                CarDealerId = null
+            };
+
+            Car2 = new Car()
+            {
+                CarInfoId = CarInfo2.Id,
                 BuyerId = null,
                 SellerId = Seller.Id,
                 CarDealerId = null
@@ -97,10 +124,13 @@ namespace CarCatalog.Services.Tests
             dbContext.CarSellers.Add(Seller);
             dbContext.CarBuyers.Add(Buyer);
 
-            dbContext.CarInfos.Add(CarInfo);
+            dbContext.CarInfos.Add(CarInfo1);
+            dbContext.CarInfos.Add(CarInfo2);
             dbContext.CarDealers.Add(CarDealer);
-            Seller.CarsAvailable.Add(Car);
-            dbContext.Cars.Add(Car);
+            Seller.CarsAvailable.Add(Car1);
+            Seller.CarsAvailable.Add(Car2);
+            dbContext.Cars.Add(Car1);
+            dbContext.Cars.Add(Car2);
 
             dbContext.SaveChanges();
         }

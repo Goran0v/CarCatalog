@@ -131,7 +131,7 @@ namespace CarCatalog.Services.Tests
         {
             string id = CarSellerUser.Id.ToString();
 
-            bool result = await this.carSellerService.HasACarWithIdAsync(id, Car.Id.ToString());
+            bool result = await this.carSellerService.HasACarWithIdAsync(id, Car1.Id.ToString());
 
             Assert.IsTrue(result);
         }
@@ -141,7 +141,7 @@ namespace CarCatalog.Services.Tests
         {
             string id = CarBuyerUser.Id.ToString();
 
-            bool result = await this.carSellerService.HasACarWithIdAsync(id, Car.Id.ToString());
+            bool result = await this.carSellerService.HasACarWithIdAsync(id, Car1.Id.ToString());
 
             Assert.IsFalse(result);
         }

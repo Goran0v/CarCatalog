@@ -27,7 +27,7 @@ namespace CarCatalog.Services.Data.Interfaces
 
         Task<bool> IsCarBoughtAsync(string carId);
 
-        Task BuyACar(string carId, string userId);
+        Task BuyACarAsync(string carId, string userId);
 
         Task<CarSellFormModel> SellABoughtCar(string carId, string userId);
     }

@@ -422,7 +422,7 @@ namespace CarCatalog.Web.Controllers
 
             try
             {
-                await this.carService.BuyACar(id, this.User.GetId()!);
+                await this.carService.BuyACarAsync(id, this.User.GetId()!);
 
                 this.TempData[SuccessMessage] = "You have successfully bought this car!";
                 return this.RedirectToAction("CarsBought", "Car");

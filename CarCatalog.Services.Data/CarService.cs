@@ -92,7 +92,7 @@ namespace CarCatalog.Services.Data
             return allSellerCars;
         }
 
-        public async Task BuyACar(string carId, string userId)
+        public async Task BuyACarAsync(string carId, string userId)
         {
             Car car = await this.dbContext
                 .Cars
