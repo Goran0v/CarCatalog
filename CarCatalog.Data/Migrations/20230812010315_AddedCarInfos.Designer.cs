@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarCatalog.Data.Migrations
 {
     [DbContext(typeof(CarCatalogDbContext))]
-    [Migration("20230811140353_RemovedFiatAndAddedFirstAndLastNameToUser")]
-    partial class RemovedFiatAndAddedFirstAndLastNameToUser
+    [Migration("20230812010315_AddedCarInfos")]
+    partial class AddedCarInfos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,244 +24,7 @@ namespace CarCatalog.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CarCatalog.Data.Models.Car", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BuyerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CarDealerId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CarInfoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SellerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("BuyerId");
-
-                    b.HasIndex("CarDealerId");
-
-                    b.HasIndex("CarInfoId")
-                        .IsUnique();
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d2037dba-188d-42e2-85f2-f7168111e38d"),
-                            CarDealerId = 1,
-                            CarInfoId = new Guid("ff4a595a-760e-4fc7-bf12-ab4c8e483f50"),
-                            SellerId = new Guid("958935ff-88c6-49a7-9cf3-83ad17184928")
-                        },
-                        new
-                        {
-                            Id = new Guid("a29c60d4-a443-4972-af8a-7ce0e0e21b3f"),
-                            CarDealerId = 2,
-                            CarInfoId = new Guid("223c38c9-9842-452c-867d-31fbb4ab177d"),
-                            SellerId = new Guid("47cecf13-b028-4b4e-990e-6676609b8c8b")
-                        });
-                });
-
-            modelBuilder.Entity("CarCatalog.Data.Models.CarBuyer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CarBuyers");
-                });
-
-            modelBuilder.Entity("CarCatalog.Data.Models.CarDealer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarDealers");
-                });
-
-            modelBuilder.Entity("CarCatalog.Data.Models.CarInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("CarType")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("Engine")
-                        .HasColumnType("int");
-
-                    b.Property<float>("EngineDisplacement")
-                        .HasColumnType("real");
-
-                    b.Property<float>("FuelConsumption")
-                        .HasColumnType("real");
-
-                    b.Property<int>("HorsePower")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<int>("PriceForSale")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Transmission")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Weight")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarInfos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7f824107-38ac-4dee-a3e9-1039680c1c94"),
-                            Brand = "Citroen",
-                            CarType = "Minivan",
-                            Description = "A really good family car with low fuel consumption.",
-                            Engine = 1,
-                            EngineDisplacement = 2f,
-                            FuelConsumption = 5.5f,
-                            HorsePower = 90,
-                            ImageUrl = "https://cdn3.focus.bg/autodata/i/citroen/xsara/xsara-picasso-n68/large/93f808a9cfb5a399babc04e50f54eb36.jpg",
-                            Mileage = 150000,
-                            Model = "Xsara Picasso",
-                            PriceForSale = 7000,
-                            Transmission = 0,
-                            Weight = 1300
-                        },
-                        new
-                        {
-                            Id = new Guid("4a7369e2-49b0-4a32-aa8c-d11bb88c89e7"),
-                            Brand = "Audi",
-                            CarType = "Sedan",
-                            Description = "An old but fast classic sedan.",
-                            Engine = 0,
-                            EngineDisplacement = 2.6f,
-                            FuelConsumption = 8.6f,
-                            HorsePower = 150,
-                            ImageUrl = "https://www.auto-data.net/images/f87/Audi-80-V-B4-Typ-8C.jpg",
-                            Mileage = 200000,
-                            Model = "80 B4",
-                            PriceForSale = 16000,
-                            Transmission = 0,
-                            Weight = 1330
-                        });
-                });
-
-            modelBuilder.Entity("CarCatalog.Data.Models.CarSeller", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CarSellers");
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("CarCatalog.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,6 +102,287 @@ namespace CarCatalog.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.Car", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BuyerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("CarDealerId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CarInfoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SellerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("BuyerId");
+
+                    b.HasIndex("CarDealerId");
+
+                    b.HasIndex("CarInfoId")
+                        .IsUnique();
+
+                    b.HasIndex("SellerId");
+
+                    b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.CarBuyer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CarBuyers");
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.CarDealer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarDealers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Pleven, Bulgaria",
+                            Description = "Selling good cars in Pleven",
+                            Name = "Pleven Auto House",
+                            PhoneNumber = "+359877778888"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Sofia, Bulgaria",
+                            Description = "Selling cheap cars in Sofia",
+                            Name = "Sofia Auto House",
+                            PhoneNumber = "+359887778888"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Burgas, Bulgaria",
+                            Description = "Selling good cars in Burgas",
+                            Name = "Burgas Auto House",
+                            PhoneNumber = "+359897778888"
+                        });
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.CarInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CarType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Engine")
+                        .HasColumnType("int");
+
+                    b.Property<float>("EngineDisplacement")
+                        .HasColumnType("real");
+
+                    b.Property<float>("FuelConsumption")
+                        .HasColumnType("real");
+
+                    b.Property<int>("HorsePower")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int>("PriceForSale")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Transmission")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarInfos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("32350c4c-d4cc-4a9f-83c5-fba2f2593c7f"),
+                            Brand = "Citroen",
+                            CarType = "Minivan",
+                            Description = "A really good family car with low fuel consumption.",
+                            Engine = 1,
+                            EngineDisplacement = 2f,
+                            FuelConsumption = 5.5f,
+                            HorsePower = 90,
+                            ImageUrl = "https://cdn3.focus.bg/autodata/i/citroen/xsara/xsara-picasso-n68/large/93f808a9cfb5a399babc04e50f54eb36.jpg",
+                            Mileage = 150000,
+                            Model = "Xsara Picasso",
+                            PriceForSale = 7000,
+                            Transmission = 0,
+                            Weight = 1300
+                        },
+                        new
+                        {
+                            Id = new Guid("0bf82f3b-bf1b-4c01-a77d-43dbfce6741d"),
+                            Brand = "Subaru",
+                            CarType = "Crossover",
+                            Description = "A good offroad car.",
+                            Engine = 0,
+                            EngineDisplacement = 2f,
+                            FuelConsumption = 8.5f,
+                            HorsePower = 125,
+                            ImageUrl = "https://cdn3.focus.bg/autodata/i/subaru/forester/forester-ii/large/a942a400b16a08d5b5788147fea6325c.jpg",
+                            Mileage = 100000,
+                            Model = "Forester",
+                            PriceForSale = 15000,
+                            Transmission = 0,
+                            Weight = 1360
+                        },
+                        new
+                        {
+                            Id = new Guid("2b3ddeb5-446f-4afa-bb05-2162992fdfd2"),
+                            Brand = "Toyota",
+                            CarType = "Hatchback",
+                            Description = "A small car ideal for the city.",
+                            Engine = 0,
+                            EngineDisplacement = 1.3f,
+                            FuelConsumption = 7.5f,
+                            HorsePower = 86,
+                            ImageUrl = "https://www.auto-data.net/images/f106/Toyota-Corolla-Hatch-VIII-E110.jpg",
+                            Mileage = 65000,
+                            Model = "Corolla Hatch",
+                            PriceForSale = 8500,
+                            Transmission = 0,
+                            Weight = 1060
+                        },
+                        new
+                        {
+                            Id = new Guid("4895d66c-5f7d-4464-a3b3-4b88257bbf60"),
+                            Brand = "Audi",
+                            CarType = "Sedan",
+                            Description = "An old but fast classic sedan.",
+                            Engine = 0,
+                            EngineDisplacement = 2.6f,
+                            FuelConsumption = 8.6f,
+                            HorsePower = 150,
+                            ImageUrl = "https://www.auto-data.net/images/f87/Audi-80-V-B4-Typ-8C.jpg",
+                            Mileage = 200000,
+                            Model = "80 B4",
+                            PriceForSale = 16000,
+                            Transmission = 0,
+                            Weight = 1330
+                        });
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.CarSeller", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CarSellers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -478,7 +522,7 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("CarCatalog.Data.Models.Car", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", null)
                         .WithMany("Cars")
                         .HasForeignKey("ApplicationUserId");
 
@@ -490,8 +534,7 @@ namespace CarCatalog.Data.Migrations
                     b.HasOne("CarCatalog.Data.Models.CarDealer", "Dealer")
                         .WithMany("RegisteredCars")
                         .HasForeignKey("CarDealerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CarCatalog.Data.Models.CarInfo", "CarInfo")
                         .WithOne()
@@ -502,8 +545,7 @@ namespace CarCatalog.Data.Migrations
                     b.HasOne("CarCatalog.Data.Models.CarSeller", "Seller")
                         .WithMany("CarsAvailable")
                         .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Buyer");
 
@@ -516,7 +558,7 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarBuyer", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", "User")
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -527,7 +569,7 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarSeller", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", "User")
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -547,7 +589,7 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -556,7 +598,7 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -571,7 +613,7 @@ namespace CarCatalog.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -580,11 +622,16 @@ namespace CarCatalog.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("HouseRentingSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("CarCatalog.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CarCatalog.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("CarCatalog.Data.Models.CarBuyer", b =>
@@ -600,11 +647,6 @@ namespace CarCatalog.Data.Migrations
             modelBuilder.Entity("CarCatalog.Data.Models.CarSeller", b =>
                 {
                     b.Navigation("CarsAvailable");
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Data.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

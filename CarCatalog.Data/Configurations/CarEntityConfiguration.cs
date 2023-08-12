@@ -18,23 +18,41 @@ namespace CarCatalog.Data.Configurations
             Car car;
             car = new Car()
             {
-                CarInfoId = Guid.Parse("FF4A595A-760E-4FC7-BF12-AB4C8E483F50"),
+                CarInfoId = Guid.Parse("2B3DDEB5-446F-4AFA-BB05-2162992FDFD2"),
                 BuyerId = null,
-                SellerId = Guid.Parse("958935FF-88C6-49A7-9CF3-83AD17184928"),
+                SellerId = Guid.Parse("745AAD63-C004-483F-99F5-0B5C58E1A90A"),
                 CarDealerId = 1
             };
             cars.Add(car);
 
             car = new Car()
             {
-                CarInfoId = Guid.Parse("223C38C9-9842-452C-867D-31FBB4AB177D"),
+                CarInfoId = Guid.Parse("0BF82F3B-BF1B-4C01-A77D-43DBFCE6741D"),
                 BuyerId = null,
                 SellerId = Guid.Parse("47CECF13-B028-4B4E-990E-6676609B8C8B"),
                 CarDealerId = 2
             };
             cars.Add(car);
 
+            car = new Car()
+            {
+                CarInfoId = Guid.Parse("4895D66C-5F7D-4464-A3B3-4B88257BBF60"),
+                BuyerId = null,
+                SellerId = Guid.Parse("47CECF13-B028-4B4E-990E-6676609B8C8B"),
+                CarDealerId = 3
+            };
+            cars.Add(car);
+
+            car = new Car()
+            {
+                CarInfoId = Guid.Parse("32350C4C-D4CC-4A9F-83C5-FBA2F2593C7F"),
+                BuyerId = null,
+                SellerId = Guid.Parse("745AAD63-C004-483F-99F5-0B5C58E1A90A"),
+                CarDealerId = 1
+            };
+            cars.Add(car);
+
             return cars.ToArray();
-        }
+        }   
     }
 }

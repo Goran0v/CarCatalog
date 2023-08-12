@@ -37,6 +37,42 @@ namespace CarCatalog.Data.Configurations
 
             carInfo = new CarInfo()
             {
+                Brand = "Subaru",
+                Model = "Forester",
+                CarType = "Crossover",
+                HorsePower = 125,
+                EngineDisplacement = 2.0f,
+                Mileage = 100000,
+                Weight = 1360,
+                FuelConsumption = 8.5f,
+                PriceForSale = 15000,
+                Transmission = TransmissionType.Manual,
+                Engine = EngineType.Gasoline,
+                ImageUrl = "https://cdn3.focus.bg/autodata/i/subaru/forester/forester-ii/large/a942a400b16a08d5b5788147fea6325c.jpg",
+                Description = "A good offroad car."
+            };
+            carInfos.Add(carInfo);
+
+            carInfo = new CarInfo()
+            {
+                Brand = "Toyota",
+                Model = "Corolla Hatch",
+                CarType = "Hatchback",
+                HorsePower = 86,
+                EngineDisplacement = 1.3f,
+                Mileage = 65000,
+                Weight = 1060,
+                FuelConsumption = 7.5f,
+                PriceForSale = 8500,
+                Transmission = TransmissionType.Manual,
+                Engine = EngineType.Gasoline,
+                ImageUrl = "https://www.auto-data.net/images/f106/Toyota-Corolla-Hatch-VIII-E110.jpg",
+                Description = "A small car ideal for the city."
+            };
+            carInfos.Add(carInfo);
+
+            carInfo = new CarInfo()
+            {
                 Brand = "Audi",
                 Model = "80 B4",
                 CarType = "Sedan",
