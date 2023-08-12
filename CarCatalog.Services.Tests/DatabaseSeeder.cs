@@ -11,6 +11,7 @@ namespace CarCatalog.Services.Tests
         public static CarSeller Seller;
         public static CarBuyer Buyer;
         public static CarInfo CarInfo;
+        public static CarDealer CarDealer;
         public static Car Car;
         public static void SeedDatabase(CarCatalogDbContext dbContext)
         {
@@ -73,6 +74,15 @@ namespace CarCatalog.Services.Tests
                 Description = "A really good family car with low fuel consumption."
             };
 
+            CarDealer = new CarDealer()
+            {
+                Id = 0,
+                Name = "Burgas Auto House",
+                Address = "Burgas, Bulgaria",
+                Description = "Selling good cars in Burgas",
+                PhoneNumber = "+359897778888"
+            };
+
             Car = new Car()
             {
                 CarInfoId = CarInfo.Id,
@@ -88,6 +98,7 @@ namespace CarCatalog.Services.Tests
             dbContext.CarBuyers.Add(Buyer);
 
             dbContext.CarInfos.Add(CarInfo);
+            dbContext.CarDealers.Add(CarDealer);
             Seller.CarsAvailable.Add(Car);
             dbContext.Cars.Add(Car);
 
